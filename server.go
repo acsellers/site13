@@ -9,6 +9,7 @@ import (
 )
 
 var PageId = regexp.MustCompile("/page/(.*)")
+var CatId = regexp.MustCompile("/cat/(.*)")
 
 func main() {
 	SetupAssets()
@@ -27,6 +28,7 @@ func SetupAssets() {
 
 func DynamicPages() {
 	DynamicPage("/page/", BlogPage)
+	DynamicPage("/cat/", CategoryPage)
 	DynamicPage("/", BlogIndex)
 }
 
@@ -35,7 +37,7 @@ func StaticPages() {
 }
 
 func BlogIndex(w http.ResponseWriter, req *http.Request) {
-	fmt.Fprintf(w, "hello person")
+	RenderBlogIndex(w, req)
 }
 
 func BlogPage(w http.ResponseWriter, req *http.Request) {
@@ -47,9 +49,26 @@ func BlogPage(w http.ResponseWriter, req *http.Request) {
 	}
 }
 
+func CategoryPage(w http.ResponseWriter, req *http.Request) {
+	if category := getCategory(req); category != "" {
+		RenderCategory(category, w)
+	} else {
+		fmt.Println("Couldn't find category")
+		NotFoundPage(w, req)
+	}
+
+}
+
 func getPageId(req *http.Request) string {
 	if PageId.MatchString(req.URL.Path) {
 		return PageId.FindStringSubmatch(req.URL.Path)[1]
+	}
+	return ""
+}
+
+func getCategory(req *http.Request) string {
+	if CatId.MatchString(req.URL.Path) {
+		return CatId.FindStringSubmatch(req.URL.Path)[1]
 	}
 	return ""
 }

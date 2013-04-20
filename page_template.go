@@ -62,21 +62,11 @@ const (
               </ul>
             </li>
             <li>
-              Popular Articles
-              <ul>
-                {{range .TopEntries}}
-                  <li>
-                    <a href='/page/{{.ID}}'>{{.Title}}</a>
-                  </li>
-                {{end}}
-              </ul>
-            </li>
-            <li>
               Categories
               <ul>
                 {{range .Categories}}
                   <li>
-                    <a href='/{{.ID}}'>{{.Name}}</a>
+                    <a href='/cat/{{.Name}}'>{{.Name}}</a>
                   </li>
                 {{end}}
               </ul>
