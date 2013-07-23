@@ -16,7 +16,7 @@ func main() {
 	StaticPages()
 	DynamicPages()
 
-	http.ListenAndServe(":8008", nil)
+	http.ListenAndServe(os.Getenv("PORT"), nil)
 }
 
 func SetupAssets() {
@@ -44,8 +44,7 @@ func BlogPage(w http.ResponseWriter, req *http.Request) {
 	if page, found := models.FindPage(getPageId(req)); found {
 		RenderBlogPage(page, w)
 	} else {
-		fmt.Println("Couldn't find page")
-		NotFoundPage(w, req)
+		RenderBlogIndex(w, req)
 	}
 }
 
