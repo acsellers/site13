@@ -46,26 +46,27 @@ var (
 )
 
 func init() {
-	db, err := sql.Open("postgres", "user=postgres password=postgres dbname=site")
-	if err != nil {
-		log.Fatal(err)
-	}
-	statements = make(map[int]*sql.Stmt)
-	statements[ENTRY_BY_PERMALINK], err = db.Prepare(SQL_ENTRY_BY_PERMALINK)
-	if err != nil {
-		log.Fatal(err)
-	}
-	statements[ENTRIES_BY_DATE], err = db.Prepare(SQL_ENTRIES_BY_DATE)
-	if err != nil {
-		log.Fatal(err)
-	}
-	statements[CATEGORIES], err = db.Prepare(SQL_CATEGORIES)
-	if err != nil {
-		log.Fatal(err)
-	}
-	statements[ENTRIES_BY_CATEGORY], err = db.Prepare(SQL_ENTRIES_BY_CATEGORY)
-	if err != nil {
-		log.Fatal(err)
-	}
-
+	/*
+		db, err := sql.Open("postgres", "user=postgres password=postgres dbname=site")
+		if err != nil {
+			log.Fatal(err)
+		}
+		statements = make(map[int]*sql.Stmt)
+		statements[ENTRY_BY_PERMALINK], err = db.Prepare(SQL_ENTRY_BY_PERMALINK)
+		if err != nil {
+			log.Fatal(err)
+		}
+		statements[ENTRIES_BY_DATE], err = db.Prepare(SQL_ENTRIES_BY_DATE)
+		if err != nil {
+			log.Fatal(err)
+		}
+		statements[CATEGORIES], err = db.Prepare(SQL_CATEGORIES)
+		if err != nil {
+			log.Fatal(err)
+		}
+		statements[ENTRIES_BY_CATEGORY], err = db.Prepare(SQL_ENTRIES_BY_CATEGORY)
+		if err != nil {
+			log.Fatal(err)
+		}
+	*/
 }
